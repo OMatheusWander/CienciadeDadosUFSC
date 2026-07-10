@@ -1,0 +1,277 @@
+#Prova 2 de Programação I - Substitutiva 
+
+import json
+
+with open('personagens_disney_2026.json', 'r', encoding='utf-8') as arq:
+    set = json.load(arq)
+
+
+# for personagem in personagens_disney_2026.json.items():
+#      print(personagem)
+# !pip install unicodedata
+#from unicodedata import normalize
+
+
+
+#Questão 1
+    
+def q1():
+        
+    
+        
+        #executar em loop
+        print(80*"*")
+        print('Bem vindo ao Banco Guaraní')
+        print(80*"*")
+        print()
+        print('Para sair da aplicação escreva: "Sair"')
+    
+    
+    
+        conta_corrente = ''
+        
+        while conta_corrente != 'Sair':
+            
+            conta_corrente = input('Digite o código da conta corrente:')
+            if conta_corrente == 'Sair':break 
+        
+            try:
+                if len(conta_corrente) != 5:
+                    print('Quantidade errada de elementos da conta corrente')
+                    continue
+                
+                # print(f'Teste inverso contacorrente: {conta_corrente[::-1]}')
+                soma_com_inverso = int(conta_corrente) + int(conta_corrente[::-1])
+                # print(soma_com_inverso)
+        
+                posição = 1
+                operação_b = 0
+                
+                for i in str(soma_com_inverso):
+                    operação_b += int(i) * posição
+                    posição +=1
+                    # print(operação_b)
+                
+                digito_verificador = str(operação_b)[1]
+                print()
+                print(f'O número da sua conta com dígito verificador é {conta_corrente}-{digito_verificador}')
+                print()
+                print('Muito obrigado e até a próxima!')
+                print(80*"*")
+        
+                break
+            
+            except ValueError:
+                print('Não é um valor númerico')
+                continue
+    
+    #Questão 2
+    
+def q2():
+            
+        
+        total_de_eleitores = candidato_1 = candidato_2 = candidato_3 = candidato_4  = branco = 0
+        nulo = -1
+        # candidatos = ['1','2','3','4']
+        valor_digitado = ''
+        #Eleição na Urna
+        while valor_digitado != '0':
+            print(80*'*')
+            print('Bem vindo a eleição (TCE)')
+            print(80*'*')
+            
+            print('Você tem o poder da democracia em suas mãos, para isto deve digitar valores de 1 à 4 de acordo com os respectivos candidatos a sua escolha.')
+            print('Caso digite "5" caracteriza voto em branco.')
+            print('Caso tenha digitado qualquer outra coisa diferente disto é considerado voto nulo.')
+            # Botão 0 foi suprimido dos usuários e somente para os fiscais da urna tem acesso para avaliação final do resultado parcial ou total da eleição em caso de mais de uma urna
+            
+            valor_digitado = input('Digite o seu voto:')
+            if valor_digitado == 0: break
+            #Feature #confimação_voto = input('Você confirma o seu voto? S para Sim ou N para Não')
+            
+            total_de_eleitores +=1
+            
+            if valor_digitado == '1':
+                candidato_1 += 1
+            elif valor_digitado == '2':
+                candidato_2 += 1
+            elif  valor_digitado == '3':
+                candidato_3 += 1
+            elif  valor_digitado == '4':
+                candidato_4 += 1
+            elif  valor_digitado == '5':
+                branco += 1
+            elif valor_digitado == 0: pass
+            else: nulo += 1
+            
+        #Resultados da Urna
+        
+        total_de_eleitores = candidato_1 + candidato_2 + candidato_3 + candidato_4 + nulo + branco
+        vencedor_da_eleição = ''
+        segundo_turno = ''
+        maior_num_votos = 0
+        
+        
+        print(80 * '*')
+        print()    
+        print(f'O total de eleitores foi de: {total_de_eleitores}') #Essa eleição considera-se votos brancos e nulos
+        
+        print()
+        if total_de_eleitores > 0 :
+            percentual_de_voto_1 = int(candidato_1) *100/ total_de_eleitores
+            percentual_de_voto_2 = int(candidato_2) *100/ total_de_eleitores
+            percentual_de_voto_3 = int(candidato_3) *100/ total_de_eleitores
+            percentual_de_voto_4 = int(candidato_4) *100/ total_de_eleitores
+        
+            print(f'Total de votos do Candidato 1: {candidato_1}')
+            print(f'Percentual de votos:{percentual_de_voto_1:.2f}%')
+            print()
+            print(f'Total de votos do Candidato 2: {candidato_2}')
+            print(f'Percentual de votos:{percentual_de_voto_2:.2f}%')
+            print()
+            print(f'Total de votos do Candidato 3: {candidato_3}')
+            print(f'Percentual de votos:{percentual_de_voto_3:.2f}%')
+            print()
+            print(f'Total de votos do Candidato 4: {candidato_4}')
+            print(f'Percentual de votos:{percentual_de_voto_4:.2f}%')
+            print()
+        
+        
+            if maior_num_votos <= candidato_1:
+                maior_num_votos = candidato_1
+                vencedor_da_eleição = 'Candidato 1'
+            
+            if maior_num_votos <= candidato_2:
+                maior_num_votos = candidato_2
+                vencedor_da_eleição = 'Candidato 2'
+            
+            if maior_num_votos <= candidato_3:
+                maior_num_votos = candidato_3
+                vencedor_da_eleição = 'Candidato 3'
+                
+            if maior_num_votos <= candidato_4:
+                maior_num_votos = candidato_4
+                vencedor_da_eleição = 'Candidato 4'
+            
+            
+                
+            print(f'Total de votos nulos: {nulo}')
+            percentual_de_voto = nulo *100 / total_de_eleitores
+            print(f'Percentual de votos nulos:{percentual_de_voto:.2f}%')
+            print()
+                    
+            print(f'Total de votos brancos: {branco}')
+            percentual_de_voto = branco *100/ total_de_eleitores
+            print(f'Percentual de votos nulos:{percentual_de_voto:.2f}%')
+            print()
+            
+            vencedores = 0
+            if maior_num_votos == candidato_1:
+                vencedores += 1
+            if maior_num_votos == candidato_2:
+                vencedores += 1
+            if maior_num_votos == candidato_3:
+                vencedores += 1
+            if maior_num_votos == candidato_4:
+                vencedores += 1
+                
+            if vencedores > 1:
+                print('Terá segundo turno das eleições.')
+            else: print(f'O vencedor da eleição é: {vencedor_da_eleição}')
+        
+    #Questão 3
+    
+def q3():
+        # ignorar = ',!?":;-.'
+        # texto = unicode(input('Digite um texto:')).replace(ignorar,"").lower()
+        #Luza Rocelina, a namorada do Manuel, leu na moda da romana: "anil é cor azul".
+        texto = (input('Digite um texto:')).replace(',',"").replace('!',"").replace("?","").replace('"',"").replace(":",'').replace(';','').replace('-','').replace('.','').replace(" ","").lower()
+        # for i in texto:
+        #     if i in ignorar:
+        #       i.pop(texto)
+        # print(texto)
+        if texto == texto[::-1]:
+         print('Resposta: é um palíndromo.')
+        else: print('Resposta: Não é um palíndromo.')
+    
+    
+    #Questão 4
+    
+def q4():
+        
+
+        # print(set)
+        #Questão 4 - a
+        print('Alternativa A')
+        lista = list(set)
+        for i in range(13):
+            print(f'Personagem: {lista[i]['identificador']}')
+            print(f'-Nome no Brasil: {lista[i]['nomes']['noBrasil']} ')
+            print(f'-Nome Internacional: {lista[i]['nomes']['internacional']}')
+            relacionamentos_grupos = len(lista[i]['familia']['grupos']) 
+            relacionamentos_pais = len(lista[i]['familia']["relacoes"]['pais']) 
+            relacionamentos_maes = len(lista[i]['familia']["relacoes"]['maes']) 
+            relacionamentos_conj = len(lista[i]['familia']["relacoes"]['conjuges']) 
+            relacionamentos_filhos = len(lista[i]['familia']["relacoes"]['filhos']) 
+            relacionamentos_irmaos = len(lista[i]['familia']["relacoes"]['irmaos_irmas']) 
+            relacionamentos_avos = len(lista[i]['familia']["relacoes"]['avos']) 
+            relacionamentos_tios = len(lista[i]['familia']["relacoes"]['tios']) 
+            relacionamentos_tias = len(lista[i]['familia']["relacoes"]['tias']) 
+            relacionamentos_sobrinhos = len(lista[i]['familia']["relacoes"]['sobrinhos']) 
+            relacionamentos_sobrinhas = len(lista[i]['familia']["relacoes"]['sobrinhas']) 
+            relacionamentos_primos = len(lista[i]['familia']["relacoes"]['primos']) 
+            relacionamentos_relacionamento_romantico = len(lista[i]['familia']["relacoes"]['relacionamento_romantico']) 
+            relacionamentos_amizades = len(lista[i]['familia']["relacoes"]['amizades']) 
+            relacionamentos_amizades_eventuais = len(lista[i]['familia']["relacoes"]['amizades_eventuais']) 
+            relacionamentos_inimizades = len(lista[i]['familia']["relacoes"]['inimizades']) 
+            relacionamentos_inimizades_eventuais = len(lista[i]['familia']["relacoes"]['inimizades_eventuais']) 
+            relacionamentos_fundador_de = len(lista[i]['familia']["relacoes"]['fundador_de']) 
+            #relacionamentos_parentes_importante = len(lista[i]['familia']["parentescoImportante"]) #CHAVE ESTÁ COMO " " E NÃO É POSSÍVEL CHEGAR NO MESMO VALOR DO EXEMPLO
+            # print(relacionamentos)
+            # print(relacionamentos_pais)
+            #print(relacionamentos_parentes_importante)
+            relacionamentos = relacionamentos_grupos+relacionamentos_pais+relacionamentos_maes+relacionamentos_conj+relacionamentos_filhos+relacionamentos_irmaos+relacionamentos_avos+ relacionamentos_tias+relacionamentos_tios+ relacionamentos_sobrinhos + relacionamentos_sobrinhas + relacionamentos_primos + relacionamentos_relacionamento_romantico + relacionamentos_amizades + relacionamentos_amizades_eventuais + relacionamentos_inimizades + relacionamentos_inimizades_eventuais + relacionamentos_fundador_de
+            print(f'-Total de relacionamentos: {relacionamentos}')
+            print()
+            
+            #Questão 4 - b
+        print('Alternativa A')
+
+        for i in range(13):
+            print(f'Personagem: {lista[i]['nomes']['noBrasil']}')
+            personalidade = len(lista[i]['caracterizacao']['personalidade'])
+            print(f'Quantidade de traços de personalidade: {personalidade}')
+            ocupacao = lista[i]['ocupacoes']
+            if len(lista[i]['ocupacoes']) > 0:
+                print(f'Ocupações: {ocupacao}',sep=" ,")
+            else:print(f'Ocupações:Nenhuma registrada')
+            if lista[i]['publicacao']['possuiRevistaNoBrasil'] == (False) or lista[i]['publicacao']['possuiRevistaNoBrasil'] == None:
+                print(f'Possui revista própria no Brasil? Não')
+            else: 
+                print(f'Possui revista própria no Brasil? Sim (Preço: R$ {lista[i]['publicacao']['precoRevistaNoBrasil']:.2f})')
+            print()
+
+#Programa Principal
+print('PROVA 2 DE PROGRAMAÇÃO I')
+print('Questão 1')
+q1() 
+print()
+print(80*'X')
+
+print('Questão 2')
+
+q2()
+print()
+print(80*'X')
+
+print('Questão 3')
+
+q3()
+print()
+print(80*'X')
+
+print('Questão 4')
+
+q4()
+print()
+print(80*'X')
